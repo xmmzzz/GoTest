@@ -5,20 +5,20 @@ import (
 	"time"
 )
 
-func say(s string,  c chan bool) {
+func say(s string, duration time.Duration, c chan bool) {
 	for i := 0; i < 5; i++ {
-		fmt.Println(s)
-		time.Sleep(100 * time.Millisecond)
+		fmt.Println(i, ":", s)
+		time.Sleep(duration)
 	}
 	c <- true
 	return
 }
 
 func main() {
-	c := make(chan bool, 1)
-	go say("hello", c)
+	c := make(chan bool, 2)
+	go say("hello", 50*time.Millisecond, c)
 
-	say("world", c)
+	say("world", 100*time.Millisecond, c)
 	<-c
 	<-c
 }
