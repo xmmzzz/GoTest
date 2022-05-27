@@ -9,6 +9,7 @@ func say(s string, duration time.Duration, c chan bool) {
 	for i := 0; i < 5; i++ {
 		fmt.Println(i, ":", s)
 		time.Sleep(duration)
+		fmt.Println("hello!")
 	}
 	c <- true
 	return
